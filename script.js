@@ -11,33 +11,37 @@ const sketch = () => {
 	const createObjects = (numberOfObjects) => {
 		let arrOfObjects = []
 		let multiplier = Math.sqrt(numberOfObjects)
+		let dimensionValue = Math.ceil(multiplier)
 		const x = dimensions[0]
 		const y = dimensions[1]
 		let distanceX = x / multiplier
 		let distanceY = y / multiplier
-		for (let i = 1; i < numberOfObjects; i++) {
-			for (let j = 1; j < Math.ceil(multiplier); j++) {
+		let counter = 1
+		for (let i = 1; i <= dimensionValue; i++) {
+			console.log(i)
+			for (let j = 1; j <= dimensionValue; j++) {
+				console.log(j)
 				let obj = {}
-				console.log(dimensions[1] / multiplier * i)
-				console.log(multiplier)
-				obj.y = y - distanceY * j
+				obj.y = y - distanceY * i
 				obj.x = x - distanceX * j
+				obj.id = counter
 				arrOfObjects.push(obj)
+				counter++
 			}
-			return arrOfObjects
 		}
+		return arrOfObjects
 	}
 
 	console.log(createObjects(10))
 
-
 	return ({context, width, height}) => {
-	  let objects_to_render = createObjects(10)
-	  for (let obj of objects_to_render) {
-	    const {x , y} = obj
-        context.fillStyle = 'black';
-        context.fillRect(x, y, 100, 100);
-      }
+		let objects_to_render = createObjects(10)
+		for (let obj of objects_to_render) {
+			const {x, y, id} = obj
+			context.fillStyle = 'black';
+			margin = 1
+			context.fillRect(x * margin, y * margin, 100, 100);
+		}
 	};
 };
 
