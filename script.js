@@ -8,22 +8,21 @@ const settings = {
 const sketch = () => {
 	let dimensions = settings.dimensions
 
-	const createObjects = (numberOfObjects) => {
+	const createObjects = (elementsPerSide) => {
 		let arrOfObjects = []
-		let multiplier = Math.sqrt(numberOfObjects)
+		let multiplier = Math.sqrt(elementsPerSide)
 		let dimensionValue = Math.ceil(multiplier)
 		const x = dimensions[0]
 		const y = dimensions[1]
 		let distanceX = x / multiplier
 		let distanceY = y / multiplier
 		let counter = 1
-		for (let i = 1; i <= dimensionValue; i++) {
-			console.log(i)
-			for (let j = 1; j <= dimensionValue; j++) {
-				console.log(j)
+		for (let i = 1; i <= elementsPerSide; i++) {
+			for (let j = 1; j <= elementsPerSide; j++) {
 				let obj = {}
-				obj.y = y - distanceY * i
-				obj.x = x - distanceX * j
+				//for large numbers drop -1
+				obj.y = y - distanceY * i / (Math.sqrt(elementsPerSide) -1)
+				obj.x = x - distanceX * j / (Math.sqrt(elementsPerSide) -1)
 				obj.id = counter
 				arrOfObjects.push(obj)
 				counter++
@@ -32,15 +31,16 @@ const sketch = () => {
 		return arrOfObjects
 	}
 
-	console.log(createObjects(10))
+	let numOfObjects = 42
 
 	return ({context, width, height}) => {
-		let objects_to_render = createObjects(10)
+		console.log(createObjects(numOfObjects))
+		let objects_to_render = createObjects(numOfObjects)
 		for (let obj of objects_to_render) {
 			const {x, y, id} = obj
 			context.fillStyle = 'black';
 			margin = 1
-			context.fillRect(x * margin, y * margin, 100, 100);
+			context.fillRect(x * margin, y * margin, 15, 15);
 		}
 	};
 };
