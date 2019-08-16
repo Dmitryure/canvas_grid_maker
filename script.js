@@ -1,9 +1,16 @@
 const canvasSketch = require('canvas-sketch');
 const utils = require('canvas-sketch-util')
+const random = require('canvas-sketch-util/random');
+const palettes = require('nice-color-palettes/1000.json')
+let palette = random.pick(palettes);
+
+
 
 const settings = {
-	dimensions: [4096, 2048]
+	dimensions: [2048, 2048]
 };
+
+const background = palette.shift()
 
 const sketch = () => {
 	let dimensions = settings.dimensions
@@ -23,25 +30,29 @@ const sketch = () => {
 				//for large numbers drop -1
 				obj.y = distanceY + y - distanceY * i / (Math.sqrt(elementsPerSide) -1)
 				obj.x = distanceX + x - distanceX * j / (Math.sqrt(elementsPerSide) -1)
+				obj.color = random.pick(palette)
 				obj.id = counter
 				arrOfObjects.push(obj)
 				counter++
-			}
+			}	
 		}
 		return arrOfObjects
 	}
 
-	let numOfObjects = 42 
+	let numOfObjects = 28
 
 	return ({context, width, height}) => {
 		console.log(createObjects(numOfObjects))
+		context.fillStyle = background
+		context.fillRect(0, 0, width, height)
 		let objects_to_render = createObjects(numOfObjects)
 		for (let obj of objects_to_render) {
-			const {x, y, id} = obj
-			context.fillStyle = 'black';
+			const {x, y, color, id} = obj
+			context.fillStyle = color;
 			margin = 1
 			context.fillRect(x * margin, y * margin, 15, 15);
 		}
+		console.log(context.fillStyle)
 	};
 };
 
