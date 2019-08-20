@@ -54,6 +54,8 @@ return ({ context, width, height }) => {
 		context.rotate(20* Math.PI / 180)
 		context.fillText(random.pick(textArr), x, y)
 		context.fillStyle = color;
+		let margin = 1
+		// context.fillRect(x * margin, y * margin, 15, 15);
 	}
 	console.log(context)
 };
