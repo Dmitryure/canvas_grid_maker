@@ -17,7 +17,6 @@ const sketch = () => {
 	const createObjects = (elementsPerSide) => {
 		let arrOfObjects = []
 		let multiplier = Math.sqrt(elementsPerSide)
-		let dimensionValue = Math.ceil(multiplier)
 		const x = dimensions[0]
 		const y = dimensions[1]
 		let distanceX = x / multiplier
@@ -42,7 +41,6 @@ const sketch = () => {
 let numOfObjects = 42
 
 return ({ context, width, height }) => {
-	console.log(createObjects(numOfObjects))
 	context.fillStyle = background
 	context.fillRect(0, 0, width, height)
 	let objects_to_render = applyNoise(createObjects(numOfObjects), 1)
