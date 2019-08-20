@@ -9,7 +9,7 @@ const settings = {
 
 const sketch = () => {
 	let dimensions = settings.dimensions
-	let numOfObjects = 5
+	let numOfObjects = 15
 
 return ({ context, width, height }) => {
 	//background
