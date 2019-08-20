@@ -1,5 +1,4 @@
 const canvasSketch = require('canvas-sketch');
-const utils = require('canvas-sketch-util')
 const random = require('canvas-sketch-util/random');
 const palettes = require('nice-color-palettes/1000.json')
 let palette = random.pick(palettes);
@@ -41,21 +40,16 @@ const sketch = () => {
 
 
 let numOfObjects = 42
-let textArr = ['엄', '엄', '한']
 
 return ({ context, width, height }) => {
 	console.log(createObjects(numOfObjects))
 	context.fillStyle = background
-	context.font = '75px Arial'
 	context.fillRect(0, 0, width, height)
-	let objects_to_render = applyNoise(createObjects(numOfObjects))
+	let objects_to_render = applyNoise(createObjects(numOfObjects), 1)
 	for (let obj of objects_to_render) {
 		const { x, y, color, id } = obj
-		context.rotate(20* Math.PI / 180)
-		context.fillText(random.pick(textArr), x, y)
 		context.fillStyle = color;
-		let margin = 1
-		// context.fillRect(x * margin, y * margin, 15, 15);
+		context.fillRect(x, y, 15, 15);
 	}
 	console.log(context)
 };
