@@ -4,12 +4,13 @@ const createObjects = require('./utils/createObjects')
 
 
 const settings = {
-	dimensions: [2048, 2048]
+	dimensions: [4096, 2048]
 };
 
 const sketch = () => {
 	let dimensions = settings.dimensions
-	let numOfObjects = 15
+	//grid density
+	let numOfObjects = 28
 
 return ({ context, width, height }) => {
 	//background
